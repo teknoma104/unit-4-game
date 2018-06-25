@@ -1,0 +1,20 @@
+body { 
+    background: url('../images/citybackdrop.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.main-title {
+    background-image: url("../images/Main_Screen-sprite.png");
+    background-repeat: no-repeat;
+}
+
+
+.main-title {
+	background: url("../images/Main_Screen-sprite.png") no-repeat -26px -38px;
+	width: 242px;
+    height: 107px;
+    background-size : 150% 150%;
+}
