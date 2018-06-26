@@ -6,6 +6,16 @@ body {
     background-size: cover;
 }
 
+.title-bar {
+    height: 200px;
+}
+
+.main-screen {
+    background-color: black;
+    color: white;
+    height: 288px;
+}
+
 .main-title {
     background-image: url("../images/Main_Screen-sprite.png");
     background-repeat: no-repeat;
@@ -17,4 +27,29 @@ body {
 	width: 242px;
     height: 107px;
     background-size : 150% 150%;
+}
+
+.leo-bio {
+	background: url('imgs/turtle-bio.png') no-repeat -5px -5px;
+	width: 271px;
+	height: 78px;
+}
+
+
+.mikey-bio {
+	background: url('imgs/turtle-bio.png') no-repeat -8px -75px;
+	width: 286px;
+	height: 56px;
+}
+
+.donny-bio {
+	background: url('imgs/turtle-bio.png') no-repeat -10px -144px;
+	width: 256px;
+	height: 56px;
+}
+
+.raph-bio {
+	background: url('imgs/turtle-bio.png') no-repeat -8px -213px;
+	width: 277px;
+	height: 56px;
 }
