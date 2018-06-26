@@ -21,6 +21,10 @@ body {
     background-repeat: no-repeat;
 }
 
+.turtle-portrait:hover{
+    border: 5px solid red;
+}
+
 
 .main-title {
 	background: url("../images/Main_Screen-sprite.png") no-repeat -26px -38px;
@@ -34,7 +38,6 @@ body {
 	width: 271px;
 	height: 78px;
 }
-
 
 .mikey-bio {
 	background: url('imgs/turtle-bio.png') no-repeat -8px -75px;
