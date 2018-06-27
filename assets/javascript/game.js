@@ -8,23 +8,8 @@ const TMNTtheme = new Audio("./assets/sounds/tmnt_theme.mp3");
 $('#start-button').click(e => TMNTtheme.play());
 
 
-$(document).ready(function () {
-    $(".main-screen").html(startGameText);
-    
-});
-
-
-
-
-
 function charSelect() {
-<<<<<<< Updated upstream
-    
-
-    $("<div></div>").addClass("row char-select").appendTo(".main-screen");
-=======
     $(".info-text").html("<p>Choose your turtle!</p>");
->>>>>>> Stashed changes
 
     // for loop to dynamically generate 4 new divs to store the portrait pictures of each turtle into
     // the char select row in the main HTML
@@ -36,15 +21,6 @@ function charSelect() {
         $(".char-select").append('<div id="char-slot-' + x + '" class="col-md-3 text-center"></div>');
         $("#char-slot-" + x).html(turtlePortrait.attr("src", "./assets/images/portrait-" + x +".png"));
     }
-<<<<<<< Updated upstream
-
-
-}
-
-// $(".turtle-portrait").hover(function () {
-//     $(this).css("border", "5px solid red");
-// });
-=======
 }
 
 function setStage() {
@@ -63,7 +39,6 @@ function setStage() {
     }
 
 }
->>>>>>> Stashed changes
 
 // Click event for start button to move to the next phase,
 // which is the character selection process
@@ -77,10 +52,6 @@ $("#start-button").click(function () {
 });
 
 
-<<<<<<< Updated upstream
-$(".turtle-portrait").click(function () {
-    var test = $('.turtle-portrait').attr('id');
-=======
 $(document).ready(function () {
     $(".info-text").html(startGameText);
 });
@@ -92,7 +63,6 @@ $(document).ready(function () {
 $(".char-select").on("click", "div", function () {
     var test = $(this).attr("id");
     console.log("test var is assigned value:  " + test);
->>>>>>> Stashed changes
     console.log("Something got clicked.");
     switch (test) {
         case 1:
@@ -110,12 +80,6 @@ $(".char-select").on("click", "div", function () {
         case 4:
             console.log("Player clicked on Raphael portrait.");
             turtleSelected = "Raphael";
-<<<<<<< Updated upstream
-            break;            
-    } 
-    alert("You have selected " + turtleSelected);
-});
-=======
             break;
     }
 
@@ -167,4 +131,3 @@ $(".char-select").on("click", "div", function () {
         setStage();
     }
 });
->>>>>>> Stashed changes
