@@ -16,10 +16,14 @@ body {
     height: 288px;
 }
 
-.display-info-bar {
+.info-text {
     background-color: black;
     color: white;
-    height: 20px;
+}
+
+#bio-slot {
+    background-color: black;
+    height: 78px;
 }
 
 .main-title {
@@ -40,25 +44,31 @@ body {
 }
 
 .leo-bio {
-	background: url('imgs/turtle-bio.png') no-repeat -5px -5px;
+	background: url("../images/turtle-bio.png") no-repeat -5px -5px;
 	width: 271px;
 	height: 78px;
 }
 
 .mikey-bio {
-	background: url('imgs/turtle-bio.png') no-repeat -8px -75px;
+	background: url("../images/turtle-bio.png") no-repeat -8px -75px;
 	width: 286px;
 	height: 56px;
 }
 
 .donny-bio {
-	background: url('imgs/turtle-bio.png') no-repeat -10px -144px;
+	background: url("../images/turtle-bio.png") no-repeat -10px -144px;
 	width: 256px;
 	height: 56px;
 }
 
 .raph-bio {
-	background: url('imgs/turtle-bio.png') no-repeat -8px -213px;
+	background: url("../images/turtle-bio.png") no-repeat -8px -213px;
 	width: 277px;
 	height: 56px;
+}
+
+.stage {
+	background: url("../images/Sewer.png") no-repeat 0 0;
+	width: 570px;
+	height: 288px;
 }

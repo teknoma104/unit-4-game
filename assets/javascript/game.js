@@ -1,6 +1,6 @@
 var playState = 'n';
 
-var startGameText = "Welcome to the TMNT game! Pick a turtle and save April O' Neil from the bad guys!";
+var startGameText = "<p>Welcome to the TMNT game! Pick a turtle and save April O' Neil from the bad guys!</p>";
 
 var turtleSelected = "";
 
@@ -10,7 +10,7 @@ $('#start-button').click(e => TMNTtheme.play());
 
 function charSelect() {
     // $("<div></div>").addClass("row char-select").appendTo(".main-screen");
-    $(".info-text").html("Choose your turtle!");
+    $(".info-text").html("<p>Choose your turtle!</p>");
 
     for (var x = 1; x < 5; x++) {
         var turtlePortrait = $("<img>");
@@ -18,9 +18,22 @@ function charSelect() {
         turtlePortrait.attr("class", "turtle-portrait");
         console.log("Creating div col for ID char-slot-" + x);
         $(".char-select").append('<div id="char-slot-' + x + '" class="col-md-3 text-center portrait-div"></div>');
-        $("#char-slot-" + x).html(turtlePortrait.attr("src", "./assets/images/portrait-" + x +".png"));
+        $("#char-slot-" + x).html(turtlePortrait.attr("src", "./assets/images/portrait-" + x + ".png"));
+
     }
 
+    // $(".main-screen").append('<div id="bio-slot" class="row justify-content-center"></div>');
+    // $("#bio-slott").append('<div class="col-lg-6 text-center bio-slot-class"></div>');
+
+}
+
+function setStage() {
+    $(".char-select").empty();
+    $("#bio-slot").attr("class","col-lg-6 text-center");
+    $(".main-screen").addClass("stage");
+    for (var x = 1; x < 5; x++) {
+        $(".char-select").append('<div id="fighter-slot-' + x + '" class="col-md-3 text-center fighter-portrait-div"></div>');
+    }
 
 }
 
@@ -36,10 +49,10 @@ $("#start-button").click(function () {
 
 
 $(document).ready(function () {
-    $(".info-text").html(startGameText); 
+    $(".info-text").html(startGameText);
 });
 
-$(".char-select").on ("click", "div", function () {
+$(".char-select").on("click", "div", function () {
     var test = $(this).attr("id");
     console.log("test var is assigned value:  " + test);
     console.log("Something got clicked.");
@@ -59,7 +72,44 @@ $(".char-select").on ("click", "div", function () {
         case "char-slot-4":
             console.log("Player clicked on Raphael portrait.");
             turtleSelected = "Raphael";
-            break;            
-    } 
-    alert("You have selected " + turtleSelected);
+            break;
+    }
+
+    $("#char-slot-1")
+        .mouseenter(function () {
+            $("#bio-slot").addClass("donny-bio");
+        })
+        .mouseleave(function () {
+            $("#bio-slot").removeClass("donny-bio");
+        });
+
+    $("#char-slot-2")
+        .mouseenter(function () {
+            $("#bio-slot").addClass("leo-bio");
+        })
+        .mouseleave(function () {
+            $("#bio-slot").removeClass("leo-bio");
+        });
+
+    $("#char-slot-3")
+        .mouseenter(function () {
+            $("#bio-slot").addClass("mikey-bio");
+        })
+        .mouseleave(function () {
+            $("#bio-slot").removeClass("mikey-bio");
+        });
+
+    $("#char-slot-4")
+        .mouseenter(function () {
+            $("#bio-slot").addClass("raph-bio");
+        })
+        .mouseleave(function () {
+            $("#bio-slot").removeClass("raph-bio");
+        });
+
+    var playerChoice = confirm("You have selected " + turtleSelected + ". Is this your final choice?");
+    if (playerChoice === true) {
+        console.log("Player has decided on " + turtleSelected);
+        setStage();
+    }
 });
