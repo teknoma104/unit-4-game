@@ -1,6 +1,6 @@
 var playState = 'n';
 
-var startGameText = "Welcome to the TMNT game! Pick a turtle and save April O' Neil from the bad guys!";
+var startGameText = "<p>Welcome to the TMNT game! Pick a turtle and save April O' Neil from the bad guys!</p>";
 
 var turtleSelected = "";
 
@@ -18,8 +18,9 @@ function charSelect() {
         turtlePortrait.attr("width", "100px");
         turtlePortrait.attr("class", "turtle-portrait");
         console.log("Creating div col for ID char-slot-" + x);
-        $(".char-select").append('<div id="char-slot-' + x + '" class="col-md-3 text-center"></div>');
-        $("#char-slot-" + x).html(turtlePortrait.attr("src", "./assets/images/portrait-" + x +".png"));
+        $(".char-select").append('<div id="char-slot-' + x + '" class="col-md-3 text-center portrait-div"></div>');
+        $("#char-slot-" + x).html(turtlePortrait.attr("src", "./assets/images/portrait-" + x + ".png"));
+
     }
 }
 
@@ -46,7 +47,7 @@ $("#start-button").click(function () {
     alert("Player clicked start the game!");
     playState = 'y';
     console.log("playState is now: " + playState);
-    $(".main-screen").html("");
+    $(".info-text").html("");
     charSelect();
 
 });
@@ -57,7 +58,7 @@ $(document).ready(function () {
 });
 
 
-// Click function used to determind which turtle the player is choosing
+// Click function used to determine which turtle the player is choosing
 // Checks the parent div ID of the image that the user clicked on to 
 // determind which turtle it is
 $(".char-select").on("click", "div", function () {
@@ -65,19 +66,19 @@ $(".char-select").on("click", "div", function () {
     console.log("test var is assigned value:  " + test);
     console.log("Something got clicked.");
     switch (test) {
-        case 1:
+        case "char-slot-1":
             console.log("Player clicked on Donatello portrait.");
             turtleSelected = "Donatello";
             break;
-        case 2:
+        case "char-slot-2":
             console.log("Player clicked on Leonardo portrait.");
             turtleSelected = "Leonardo";
             break;
-        case 3:
+        case "char-slot-3":
             console.log("Player clicked on Michelangelo portrait.");
             turtleSelected = "Michelangelo";
             break;
-        case 4:
+        case "char-slot-4":
             console.log("Player clicked on Raphael portrait.");
             turtleSelected = "Raphael";
             break;
