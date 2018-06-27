@@ -16,6 +16,12 @@ body {
     height: 288px;
 }
 
+.display-info-bar {
+    background-color: black;
+    color: white;
+    height: 20px;
+}
+
 .main-title {
     background-image: url("../images/Main_Screen-sprite.png");
     background-repeat: no-repeat;
