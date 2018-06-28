@@ -101,3 +101,14 @@ body {
 .initiallyHidden {
     display: none;
 }
+
+/* .don-idle {
+	background: url('../images/don-test1.png') left center;
+	width: 106.6px;
+    height: 73px;
+    animation: play 1s steps(5) infinite;
+}
+
+@keyframes play {
+    100% { background-position: -533px; }
+ } */
