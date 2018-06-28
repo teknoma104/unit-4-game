@@ -20,13 +20,29 @@
             </div>
         </div>
         <div class="row">
-            <div class="col lg-3">
+            <div class="col lg-3" id="hero-battle-portrait">
+                <div class="row">
+                    <div class="col-sm-6" id="HP">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" id="MP">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" id="atk">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" id="spatk">
+                    </div>
+                </div>
             </div>
             <div class="col-lg-6 text-center main-screen">
                 <div class="row char-select">
                 </div>
             </div>
-            <div class="col lg-3">
+            <div class="col lg-3" id="enemy-battle-portrait">
             </div>
         </div>
         <div class="row display-info-bar">
@@ -38,16 +54,18 @@
             </div>
         </div>
         <div class="row">
-                <div class="col lg-3">
-                </div>
-                <div id="bio-slot" class="col-lg-6 justify-content-center">
-                </div>
-                <div class="col lg-3">
-                </div>
+            <div class="col lg-3">
             </div>
+            <div id="bio-slot" class="col-lg-6 justify-content-center">
+            </div>
+            <div class="col lg-3">
+            </div>
+        </div>
         <div class="row game-start">
             <div class="col md-6 text-center">
                 <button id="start-button">Push to start!</button>
+                <button class="initiallyHidden" id="atk-button">Attack!</button>
+                <button class="initiallyHidden" id="spatk-button">Special Attack!</button>
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@ body {
 
 #bio-slot {
     background-color: black;
-    height: 78px;
+    height: 56px;
 }
 
 .main-title {
@@ -46,7 +46,7 @@ body {
 .leo-bio {
 	background: url("../images/turtle-bio.png") no-repeat -5px -5px;
 	width: 271px;
-	height: 78px;
+	height: 56px;
 }
 
 .mikey-bio {
@@ -71,4 +71,33 @@ body {
 	background: url("../images/Sewer.png") no-repeat 0 0;
 	width: 570px;
 	height: 288px;
+}
+
+#HP {
+    background-color: black;
+    color: #00FF00;
+}
+
+#MP {
+    background-color: black;
+    color: #00FF00;
+}
+
+#atk {
+    background-color: black;
+    color: #00FF00;
+}
+
+#spatk {
+    background-color: black;
+    color: #00FF00;
+}
+
+#specialbutton {
+    background-color: black;
+    color: #00FF00;
+}
+
+.initiallyHidden {
+    display: none;
 }
