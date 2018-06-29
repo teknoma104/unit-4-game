@@ -24,6 +24,7 @@ body {
 #bio-slot {
     background-color: black;
     height: 56px;
+    color: #00FF00;
 }
 
 .main-title {
@@ -102,7 +103,7 @@ body {
     color: #00FF00;
 }
 
-#enemyCATK {
+#enemyCAtk {
     background-color: black;
     color: #00FF00;
 }
@@ -120,6 +121,11 @@ body {
 .initiallyHidden {
     display: none;
 }
+
+.nopadding {
+    padding: 0;
+    margin: 0;
+ }
 
 /* .don-idle {
 	background: url('../images/don-test1.png') left center;
