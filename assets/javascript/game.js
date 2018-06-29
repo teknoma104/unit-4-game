@@ -1,8 +1,8 @@
 var turtleDB = [
-    { n: "Donatello", hp: 100, mp: 50, atkpwr: 9, spatk: 80, spcost: 40, catk: 30, p: "./assets/images/don-battle-portrait.png" },
-    { n: "Leonardo", hp: 130, mp: 50, atkpwr: 10, spatk: 100, spcost: 50, catk: 50, p: "./assets/images/leo-battle-portrait.png" },
+    { n: "Donatello", hp: 100, mp: 50, atkpwr: 9, spatk: 80, spcost: 40, catk: 20, p: "./assets/images/don-battle-portrait.png" },
+    { n: "Leonardo", hp: 130, mp: 50, atkpwr: 10, spatk: 100, spcost: 50, catk: 35, p: "./assets/images/leo-battle-portrait.png" },
     { n: "Michelangelo", hp: 120, mp: 60, atkpwr: 7, spatk: 30, spcost: 20, catk: 5, p: "./assets/images/mikey-battle-portrait.png" },
-    { n: "Raphael", hp: 150, mp: 50, atkpwr: 8, spatk: 50, spcost: 25, catk: 15, p: "./assets/images/raph-battle-portrait.png" },
+    { n: "Raphael", hp: 140, mp: 50, atkpwr: 8, spatk: 50, spcost: 25, catk: 15, p: "./assets/images/raph-battle-portrait.png" },
 ];
 
 var enemyDB = [
@@ -11,7 +11,7 @@ var enemyDB = [
     { n: "Shredder", hp: 210, atkpwr: 6, cpatk: 35, p: "./assets/images/shredder_battle_portrait.png" }
 ];
 
-var playState = 'n';
+
 
 var startGameText = "<p>Welcome to the TMNT game! Pick a turtle and save April O' Neil from the bad guys!</p>";
 
@@ -23,13 +23,18 @@ var charsTakenOutOfPlay = [];
 var playerHP = 0;
 var playerATK = 0;
 var playerMP = 0;
+var playerSPATK = 0;
+var playerMPCost = 0;
 var newATKPower = 0;
 
 var enemyHP = 0;
 var enemyCATK = 0;
 
-// const TMNTtheme = new Audio("./assets/sounds/tmnt_theme.mp3");
-// $('#start-button').click(e => TMNTtheme.play());
+const TMNTtheme = new Audio("./assets/sounds/tmnt_theme.mp3");
+$('#start-button').click(e => TMNTtheme.play());
+
+const winTheme = new Audio("./assets/sounds/victory.mp3");
+const gameOver = new Audio("./assets/sounds/game_over.mp3");
 
 
 function charSelect() {
@@ -155,40 +160,45 @@ function setStage() {
             console.log("Adding Donatello's battle portrait.");
             playerHP = turtleDB[0].hp;
             playerMP = turtleDB[0].mp;
+            playerMPCost = turtleDB[0].spcost;
             playerATK = turtleDB[0].atkpwr;
+            playerSPATK = turtleDB[0].spatk;
             battlePortrait.attr({ src: turtleDB[0].p, width: "142px" });
-            $("#spatk").html('SP ATK: ' + turtleDB[0].spatk);
-            // $("#fighter-slot-1").addClass("don-idle");
+
             break;
         case "Leonardo":
             console.log("Adding Leonardo's battle portrait.");
             playerHP = turtleDB[1].hp;
             playerMP = turtleDB[1].mp;
+            playerMPCost = turtleDB[1].spcost;
             playerATK = turtleDB[1].atkpwr;
+            playerSPATK = turtleDB[1].spatk;
             battlePortrait.attr({ src: turtleDB[1].p, width: "142px" });
-            $("#spatk").html('SP ATK: ' + turtleDB[1].spatk);
             break;
         case "Michelangelo":
             console.log("Adding Michelangelo's battle portrait.");
             playerHP = turtleDB[2].hp;
             playerMP = turtleDB[2].mp;
+            playerMPCost = turtleDB[2].spcost;
             playerATK = turtleDB[2].atkpwr;
+            playerSPATK = turtleDB[2].spatk;
             battlePortrait.attr({ src: turtleDB[2].p, width: "142px" });
-            $("#spatk").html('SP ATK: ' + turtleDB[2].spatk);
             break;
         case "Raphael":
             console.log("Adding Raphael's battle portrait.");
             playerHP = turtleDB[3].hp;
             playerMP = turtleDB[3].mp;
+            playerMPCost = turtleDB[3].spcost;
             playerATK = turtleDB[3].atkpwr;
+            playerSPATK = turtleDB[3].spatk;
             battlePortrait.attr({ src: turtleDB[3].p, width: "142px" });
-            $("#spatk").html('SP ATK: ' + turtleDB[3].spatk);
             break;
     }
 
     $("#HP").html('HP: ' + playerHP);
     $("#MP").html('MP: ' + playerMP);
     $("#atk").html('ATK: ' + playerATK);
+    $("#spatk").html('SP ATK: ' + playerSPATK);
 
     $("#hero-portrait").html(battlePortrait);
 
@@ -205,6 +215,9 @@ function selectEnemy() {
     var enemyPortrait = $("<img>");
 
     var validCharPicked = false;
+
+    $("#atk-button").hide();
+    $("#spatk-button").hide();
 
     $(".info-text").html("Select the enemy you with to attack!");
 
@@ -304,8 +317,8 @@ function selectEnemy() {
     }
 
     for (var y = 0; y < charsTakenOutOfPlay.length; y++) {
-            $('#'+charsTakenOutOfPlay[y]).empty();
-            $('#'+charsTakenOutOfPlay[y]).removeAttr("id");
+        $('#' + charsTakenOutOfPlay[y]).empty();
+        $('#' + charsTakenOutOfPlay[y]).removeAttr("id");
     }
 
 
@@ -381,18 +394,23 @@ function selectEnemy() {
             battlePhase();
     });
 
-    
+
 }
 
 function battlePhase() {
     console.log("battlePhase function called");
     $("#atk-button").removeClass("initiallyHidden");
     $("#spatk-button").removeClass("initiallyHidden");
+    $("#atk-button").show();
+    $("#spatk-button").show();
     $(".info-text").html("Time to fight!");
     if (newATKPower === 0)
         newATKPower = playerATK;
     var maxPlayerHP = playerHP;
+    var maxPlayerMP = playerMP;
     var maxEnemyHP = enemyHP;
+    
+
 
     console.log("newATKPower is: " + newATKPower);
     console.log("enemyHP: " + enemyHP);
@@ -408,18 +426,36 @@ function battlePhase() {
             $("#enemyHP").html("");
             $("#enemyHP").css("color", "#00FF00");
             $("#enemyCAtk").html("");
+            $("#bio-slot").html("");
+            winTheme.play();
 
-            console.log("------------Calling selectEnemy function again.------------");
-            selectEnemy();
+            if (charsTakenOutOfPlay.length === 4) {
+                $(".info-text").html("Congratulations! You beat all your opponents! Hit the reset button to play again.");
+                // $("#atk-button").addClass("initiallyHidden");
+                $("#atk-button").hide();
+                // $("#spatk-button").addClass("initiallyHidden");
+                $("#spatk-button").hide();
+                $("#reset-button").removeClass("initiallyHidden");
+                $("#reset-button").show();
+            }
+            else {
+                alert("You beat your enemy! Moving back to enemy selection phase.");
+                console.log("------------Calling selectEnemy function again.------------");
+                selectEnemy();
+            }
         }
         else if (playerHP <= 0) {
             console.log("playerHP is " + playerHP + "! You died! Game over.");
             $("#atk-button").addClass("initiallyHidden");
             $("#spatk-button").addClass("initiallyHidden");
             $("#reset-button").removeClass("initiallyHidden");
+            $("#reset-button").show();
+
+            $(".info-text").html("You were defeated. Game Over! Hit the reset button to play again.");
+            gameOver.play();
         }
         else if ((playerHP > 0) && (enemyHP > 0)) {
-            $(".bio-slot").html("You attacked for " + playerATK + "! The enemy counterattacks for " + enemyCATK + "!");
+            $("#bio-slot").html("You attacked for " + newATKPower + "! The enemy counterattacks for " + enemyCATK + "!");
             console.log("You attacked for " + playerATK + "! The enemy counterattacks for " + enemyCATK + "!");
 
             enemyHP -= newATKPower;
@@ -448,8 +484,91 @@ function battlePhase() {
             console.log("New attack power is now: " + newATKPower);
             $("#atk").html('ATK: ' + newATKPower);
         }
-        
-        
+
+
+    });
+
+    $("#spatk-button").off().on("click", function () {
+        console.log("Player clicked special attack button.");
+
+        console.log("playerMP is: " + playerMP);
+        console.log("playerMPCost is: " + playerMPCost);
+
+        if (playerMP - playerMPCost >= 0) {
+            playerMP -= playerMPCost;
+
+            if (enemyHP <= 0) {
+                console.log("enemy HP is " + enemyHP + "! You beat him.");
+                $("#enemy-portrait").html("");
+                $("#enemyHP").html("");
+                $("#enemyHP").css("color", "#00FF00");
+                $("#enemyCAtk").html("");
+                $("#bio-slot").html("");
+                winTheme.play();
+
+                alert("You beat your enemy! Moving back to enemy selection phase.");
+
+                if (charsTakenOutOfPlay.length === 4) {
+                    $(".info-text").html("Congratulations! You beat all your opponents! Hit the reset button to play again.");
+                    $("#atk-button").attr("class", "initiallyHidden");
+                    $("#spatk-button").attr("class", "initiallyHidden");
+                    $("#reset-button").removeClass("initiallyHidden");
+                    $("#reset-button").show();
+                }
+                else {
+                    console.log("------------Calling selectEnemy function again.------------");
+                    selectEnemy();
+                }
+            }
+            else if (playerHP <= 0) {
+                console.log("playerHP is " + playerHP + "! You died! Game over.");
+                $("#atk-button").attr("class", "initiallyHidden");
+                $("#spatk-button").attr("class", "initiallyHidden");
+                $("#reset-button").removeClass("initiallyHidden");
+                $("#reset-button").show();
+                
+                $(".info-text").html("You were defeated. Game Over! Hit the reset button to play again.");
+                gameOver.play();
+            }
+            else if ((playerHP > 0) && (enemyHP > 0)) {
+                $("#bio-slot").html("You use your special attack for " + playerSPATK + "! The enemy counterattacks for " + enemyCATK + "!");
+                console.log("You attacked for " + playerSPATK + "! The enemy counterattacks for " + enemyCATK + "!");
+
+                enemyHP -= playerSPATK;
+                console.log("enemyHP: " + enemyHP);
+                console.log("maxEnemyHP: " + maxEnemyHP);
+                console.log(((enemyHP / maxEnemyHP) * 100));
+                console.log("First part of if statement value is: " + (((enemyHP / maxEnemyHP) * 100) < 100));
+                console.log(((enemyHP / maxEnemyHP) * 100));
+                console.log("Second part of if statement value is: " + (((enemyHP / maxEnemyHP) * 100) > 50));
+                if ((((enemyHP / maxEnemyHP) * 100) < 100) && (((enemyHP / maxEnemyHP) * 100) > 50))
+                    $("#enemyHP").css("color", "yellow");
+                else if (((enemyHP / maxEnemyHP) * 100) < 50)
+                    $("#enemyHP").css("color", "red");
+                $("#enemyHP").html('HP: ' + enemyHP);
+
+                if ((((playerMP / maxPlayerMP) * 100) < 100) && (((playerMP / maxPlayerMP) * 100) > 50))
+                    $("#MP").css("color", "yellow");
+                else if (((playerMP / maxPlayerMP) * 100) < 50)
+                    $("#MP").css("color", "red");
+                $("#MP").html('MP: ' + playerMP);
+
+
+                playerHP -= enemyCATK;
+                if ((((playerHP / maxPlayerHP) * 100) < 100) && (((playerHP / maxPlayerHP) * 100) > 50))
+                    $("#HP").css("color", "yellow");
+                else if (((playerHP / maxPlayerHP) * 100) < 50)
+                    $("#HP").css("color", "red");
+                console.log("playerHP: " + playerHP);
+                $("#HP").html('HP: ' + playerHP);
+
+                console.log("No change to player's attack power due to using special attack move.");
+                console.log("Original attack power is: " + playerATK);
+                console.log("Your current attack power is: " + newATKPower);
+            }
+        }
+        else
+            $("#bio-slot").html("Not enough MP to do a special attack. Please use a regular attack.");
     });
 }
 
@@ -464,10 +583,42 @@ $(document).ready(function () {
     $("#start-button").click(function () {
         alert("Player clicked start the game!");
         $(this).hide();
-        playState = 'y';
-        console.log("playState is now: " + playState);
         $(".info-text").html("");
         charSelect();
+    });
+
+    $("#reset-button").click(function () {
+        alert("Resetting Game!");
+        $(this).hide();
+        playerHP = 0;
+        playerATK = 0;
+        playerMP = 0;
+        playerSPATK = 0;
+        playerMPCost = 0;
+        newATKPower = 0;
+
+        charsTakenOutOfPlay = [];
+
+        enemyHP = 0;
+        enemyCATK = 0;
+
+        $("#start-button").show();
+        $(".info-text").html(startGameText);
+        $(".char-select").empty();
+        $("#bio-slot").html("");
+
+        $("#HP").html("");
+        $("#MP").html("");
+        $("#atk").html("");
+        $("#spatk").html("");
+        $("#hero-portrait").html("");
+
+        $("#enemy-portrait").html("");
+        $("#enemyHP").html("");
+        $("#enemyCAtk").html("");
+
+        $("#HP").css("color", "#00FF00");
+        $("#enemyHP").css("color", "#00FF00");
     });
 });
 
