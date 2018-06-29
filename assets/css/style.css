@@ -35,6 +35,15 @@ body {
     border: 5px solid red;
 }
 
+.battle-portrait:hover{
+    border: 5px solid red;
+}
+
+.battle-portrait {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
 
 .main-title {
 	background: url("../images/Main_Screen-sprite.png") no-repeat -26px -38px;
@@ -78,12 +87,22 @@ body {
     color: #00FF00;
 }
 
+#enemyHP {
+    background-color: black;
+    color: #00FF00;
+}
+
 #MP {
     background-color: black;
     color: #00FF00;
 }
 
 #atk {
+    background-color: black;
+    color: #00FF00;
+}
+
+#enemyCATK {
     background-color: black;
     color: #00FF00;
 }

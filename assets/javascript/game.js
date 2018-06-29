@@ -23,6 +23,7 @@ var playerATK = 0;
 var playerMP = 0;
 
 var enemyHP = 0;
+var enemyCATK = 0;
 
 const TMNTtheme = new Audio("./assets/sounds/tmnt_theme.mp3");
 $('#start-button').click(e => TMNTtheme.play());
@@ -71,13 +72,16 @@ function charSelect() {
 
         // Mouseenter/mouseleave event that shows Donatello's bio in bio-slot once a user
         // moves the mouse into Donatello's div area
-        $("#char-slot-1")
-            .mouseenter(function () {
-                $("#bio-slot").addClass("donny-bio");
-            })
-            .mouseleave(function () {
-                $("#bio-slot").removeClass("donny-bio");
-            });
+        $(".char-select").on("mouseenter", "#char-slot-1", function () {
+            $("#bio-slot").addClass("donny-bio");
+            console.log("User mouse entered donny portrait, attempting to show Donny bio");
+        });
+            
+            
+        $(".char-select").on("mouseleave", "#char-slot-1", function () {
+            $("#bio-slot").removeClass("donny-bio");
+            console.log("User mouse left donny portrait, attempting to remove Donny bio");
+        });
 
         // Mouseenter/mouseleave event that shows Leonardo's bio in bio-slot once a user
         // moves the mouse into Leonardo's div area
@@ -190,46 +194,91 @@ function selectEnemy() {
     var turtlePortrait1 = $("<img>");
     var turtlePortrait2 = $("<img>");
     var turtlePortrait3 = $("<img>");
-
-    turtlePortrait1.attr("width", "100px");
-    turtlePortrait2.attr("width", "100px");
-    turtlePortrait3.attr("width", "100px");
+    var enemyPortrait = $("<img>");
 
     switch (turtleSelected) {
         case "Donatello":
             console.log("Donatello was the hero selected. That means Leo-Mikey-Raph should be selectable enemies.");
-            $("#fighter-slot-2").html(turtlePortrait1.attr("src", "./assets/images/portrait-2.png"));
-            $("#fighter-slot-2").attr("id","Leonardo");
-            $("#fighter-slot-3").html(turtlePortrait2.attr("src", "./assets/images/portrait-3.png"));
+            $("#fighter-slot-2").html(turtlePortrait1.attr( {
+                src : "./assets/images/portrait-2.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
+            $("#fighter-slot-3").attr("id","Leonardo");
+            $("#fighter-slot-3").html(turtlePortrait2.attr( {
+                src: "./assets/images/portrait-3.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-3").attr("id","Michelangelo");
-            $("#fighter-slot-4").html(turtlePortrait3.attr("src", "./assets/images/portrait-4.png"));
+            $("#fighter-slot-4").html(turtlePortrait3.attr( {
+                src: "./assets/images/portrait-4.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-4").attr("id","Raphael");
             break;
         case "Leonardo":
             console.log("Leonardo was the hero selected. That means Don-Mikey-Raph should be selectable enemies.");
-            $("#fighter-slot-2").html(turtlePortrait1.attr("src", "./assets/images/portrait-1.png"));
+            $("#fighter-slot-2").html(turtlePortrait1.attr( {
+                src: "./assets/images/portrait-1.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-2").attr("id","Donatello");
-            $("#fighter-slot-3").html(turtlePortrait2.attr("src", "./assets/images/portrait-3.png"));
+            $("#fighter-slot-3").html(turtlePortrait2.attr( {
+                src: "./assets/images/portrait-3.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-3").attr("id","Michelangelo");
-            $("#fighter-slot-4").html(turtlePortrait3.attr("src", "./assets/images/portrait-4.png"));
+            $("#fighter-slot-4").html(turtlePortrait3.attr( {
+                src: "./assets/images/portrait-4.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-4").attr("id","Raphael");
             break;
         case "Michelangelo":
             console.log("Michelangelo was the hero selected. That means Don-Leo-Raph should be selectable enemies.");
-            $("#fighter-slot-2").html(turtlePortrait1.attr("src", "./assets/images/portrait-1.png"));
+            $("#fighter-slot-2").html(turtlePortrait1.attr( {
+                src: "./assets/images/portrait-1.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-2").attr("id","Donatello");
-            $("#fighter-slot-3").html(turtlePortrait2.attr("src", "./assets/images/portrait-2.png"));
+            $("#fighter-slot-3").html(turtlePortrait2.attr( {
+                src: "./assets/images/portrait-2.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-3").attr("id","Leonardo");
-            $("#fighter-slot-4").html(turtlePortrait3.attr("src", "./assets/images/portrait-4.png"));
+            $("#fighter-slot-4").html(turtlePortrait3.attr( {
+                src: "./assets/images/portrait-4.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-4").attr("id","Raphael");
             break;
         case "Raphael":
             console.log("Raphael was the hero selected. That means Don-Leo-Mikey should be selectable enemies.");
-            $("#fighter-slot-2").html(turtlePortrait1.attr("src", "./assets/images/portrait-1.png"));
+            $("#fighter-slot-2").html(turtlePortrait1.attr( {
+                src: "./assets/images/portrait-1.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-2").attr("id","Donatello");
-            $("#fighter-slot-3").html(turtlePortrait2.attr("src", "./assets/images/portrait-2.png"));
+            $("#fighter-slot-3").html(turtlePortrait2.attr( {
+                src: "./assets/images/portrait-2.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-3").attr("id","Leonardo");
-            $("#fighter-slot-4").html(turtlePortrait3.attr("src", "./assets/images/portrait-3.png"));
+            $("#fighter-slot-4").html(turtlePortrait3.attr( {
+                src: "./assets/images/portrait-3.png",
+                width: "100px",
+                class: "battle-portrait"
+            }));
             $("#fighter-slot-4").attr("id","Michelangelo");
             break;
     }
@@ -242,6 +291,11 @@ function selectEnemy() {
             case "Donatello":
                 console.log("Player clicked on Donatello portrait.");
                 enemySelected = "Donatello";
+                enemyHP = turtleDB[0].hp;
+                enemyCATK = turtleDB[0].catk;
+                enemyPortrait.attr("src", turtleDB[0].p);
+                $("#enemyHP").html('HP: ' + enemyHP);
+                $("#enemyCATK").html('CATK: ' + enemyCATK);
                 break;
             case "Leonardo":
                 console.log("Player clicked on Leonardo portrait.");
