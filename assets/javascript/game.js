@@ -277,7 +277,7 @@ function selectEnemy() {
     $("#atk-button").hide();
     $("#spatk-button").hide();
 
-    $(".info-text").html("Select the enemy you with to attack!");
+    $(".info-text").html("Select the enemy you want to attack!");
 
     // Generates 4 new divs with different ID names so the char-select onclick won't trigger
     for (var x = 1; x < 5; x++) {
