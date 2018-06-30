@@ -5,7 +5,7 @@ var turtleDB = [
     { n: "Raphael", hp: 140, mp: 50, atkpwr: 8, spatk: 50, spcost: 25, catk: 15, p: "./assets/images/raph-battle-portrait.png" },
 ];
 
-var startGameText = "<p>Welcome to the TMNT game! Pick a turtle and save April O' Neil from the bad guys!</p>";
+var startGameText = "<p>Welcome to the TMNT game! Pick a turtle and battle your turtle brothers!</p>";
 
 var turtleSelected = "";
 var enemySelected = "";
